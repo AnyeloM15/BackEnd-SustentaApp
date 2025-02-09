@@ -42,7 +42,7 @@ $ pnpm remove prettier eslint-config-prettier eslint-plugin-prettier
 ```bash
 #Docker
 $ docker-compose up -d
-
+$ docker run --name sustenta-postgres -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=SustentaApp2024 -e POSTGRES_DB=SustentaApp -p 5432:5432 -d postgres
 ```
 
 ## Change name from .env_template to .env
