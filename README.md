@@ -50,7 +50,7 @@ $ docker-compose up -d
 ## Install dependencies for hashsed password
 
 ```bash
-$ pnpm install @types/bcrypt --save-dev
+$ pnpm install @types/bcryptjs --save-dev
 $ pnpm add @nestjs/jwt @nestjs/passport passport passport-jwt bcryptjs
 $ pnpm add @types/passport-jwt @types/bcryptjs --save-dev
 
