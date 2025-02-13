@@ -1,7 +1,7 @@
-import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
-import { LoginDto, RegisterDto } from './dto/auth.dto';
+import { LoginDto } from './dto/auth.dto';
 import * as bcrypt from 'bcryptjs';
 
 @Injectable()
@@ -27,7 +27,7 @@ export class AuthService {
       throw new UnauthorizedException('Credenciales incorrectas');
     }
     // Generar token de acceso
-    const payload = { sub: user.id, role: user.role };
+    const payload = { sub: user.id, role: user.role , name: user.fullName, matricula: user.matricula };
     return {
       access_token: this.jwtService.sign(payload),
     };

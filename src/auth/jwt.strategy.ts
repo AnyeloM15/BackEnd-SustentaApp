@@ -8,11 +8,11 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
     constructor() {
         super({
         jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-        secretOrKey: process.env.JWT_SECRET || 'secret',
+        secretOrKey: process.env.JWT_SECRET || 'supersecreto',
         });
     }
 
     async validate(payload: any) {
-        return { userId: payload.sub, role: payload.role };
+        return { userId: payload.sub, role: payload.role, fullName: payload.name, matricula: payload.matricula };
     }
 }

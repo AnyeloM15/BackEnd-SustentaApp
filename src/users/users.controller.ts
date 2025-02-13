@@ -1,6 +1,6 @@
 import { Controller, Post, Body, Get, Param, Patch } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { CreateUserDto } from './dto/create-user.dto';
+import { CreateUserDto, UpdatePenaltyDto } from './dto/index';
 
 @Controller('users')
 export class UsersController {
@@ -18,9 +18,11 @@ export class UsersController {
 
   @Patch('penalty/:matricula')
   async updatePenalty(
-    @Param('matricula') matricula: string,  
-    @Body('isPenalized') isPenalized: boolean,
+    @Param('matricula') matricula: string, 
+    @Body()UpdatePenaltyDto: UpdatePenaltyDto ,
+    // @Body('isPenalized') isPenalized: boolean,
   ) {
-    return this.usersService.updatePenalized(matricula, isPenalized);
+    return this.usersService.updatePenalized(matricula, UpdatePenaltyDto);
   }
+
 }

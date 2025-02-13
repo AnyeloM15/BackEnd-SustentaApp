@@ -1,4 +1,4 @@
-import { Controller, Post, Body, UseGuards, Request, Get } from '@nestjs/common';
+import { Controller, Post, Body, UseGuards, Request, Get, Headers } from '@nestjs/common';
 import { RegisterService } from './register.service';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { Register } from './entities/register.entity';
@@ -20,18 +20,20 @@ export class RegisterController {
   }
 
   @Post('start-hours')
-  async startHours(@Body('token') token: string){
+  async startHours(@Headers('Authorization') authHeader: string) {
+    const token = authHeader?.split(' ')[1];
+    console.log("Received Authorization header:", authHeader);
     return this.registerService.startHoursToken(token);
   }
   @UseGuards(JwtAuthGuard)
-  @Post('end')
+  @Post('end-hours')
   async endRegistro(@Request() req) {
     return this.registerService.endHours(req.user.userId);
   }
 
   // Obtener el resumen de horas trabajadas por usuario
   @UseGuards(JwtAuthGuard)
-  @Get('hours')
+  @Get('hours-worked')
   async getHoursByUser(@Request() req): Promise<UserHoursSummary> {
     return this.registerService.getHoursByUser(req.user.userId);
   }
